@@ -7,8 +7,7 @@ from modules.processing import Processed
 from modules.shared import opts, state
 
 class TextGener():
-    def __init__(self, p, input_text, font_size, num_layers, offset):
-        self.p:StableDiffusionProcessing = p
+    def __init__(self, input_text, font_size, num_layers, offset):
         input_text = input_text
         font_size = font_size
         num_layers = num_layers
@@ -59,7 +58,7 @@ class Script(scripts.Script):
             return input_text, font_size, num_layers, offset
 
     def run(self, p, input_text, font_size, num_layers, offset):
-        text = TextGener(p, input_text, font_size, num_layers, offset)
+        text = TextGener(input_text, font_size, num_layers, offset)
         image = text.create_text(input_text, font_size, num_layers, offset)
         
         return Processed(p, image)
