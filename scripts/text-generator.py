@@ -55,11 +55,11 @@ class Script(scripts.Script):
             input_text = gr.Textbox(label="Text Input", lines=3)
             font_size = gr.Slider(label='Font Size', minimum=10, maximum=150, step=20, value=100, visible=True, interactive=True)
             num_layers = gr.Slider(label='Num Layers', minimum=2, maximum=15, step=1, value=8, visible=True, interactive=True)
-            offset = gr.Slider(label='Num Layers', minimum=2, maximum=5, step=1, value=2, visible=True, interactive=True)
+            offset = gr.Slider(label='Offset', minimum=2, maximum=5, step=1, value=2, visible=True, interactive=True)
             return input_text, font_size, num_layers, offset
 
     def run(self, p, input_text, font_size, num_layers, offset):
-        text = TextGener(p, input_text, font_size, num_layers, offset)
-        image = text.create_text(input_text, font_size , num_layers, offset)
+        text = TextGener(input_text, font_size, num_layers, offset)
+        image = text.create_text(input_text, font_size, num_layers, offset)
         
         return Processed(p, image)
