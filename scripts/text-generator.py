@@ -7,14 +7,14 @@ from modules.processing import Processed
 from modules.shared import opts, state
 
 class TextGener():
-    def __init__(self, p, input_text, font_size, num_layers, offset) -> None:
+    def __init__(self, p, input_text, font_size, num_layers, offset):
         self.p:StableDiffusionProcessing = p
         input_text = input_text
         font_size = font_size
         num_layers = num_layers
         offset = offset
         
-    def create_text(input_text, font_size , num_layers, offset):
+    def create_text(input_text, font_size, num_layers, offset):
         # font = ImageFont.truetype("arialbd.ttf", font_size)
         font = ImageFont.load_default(font_size)
         # Create a new image with a white background
@@ -59,7 +59,7 @@ class Script(scripts.Script):
             return input_text, font_size, num_layers, offset
 
     def run(self, p, input_text, font_size, num_layers, offset):
-        text = TextGener(input_text, font_size, num_layers, offset)
+        text = TextGener(p, input_text, font_size, num_layers, offset)
         image = text.create_text(input_text, font_size, num_layers, offset)
         
         return Processed(p, image)
