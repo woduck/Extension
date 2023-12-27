@@ -60,6 +60,6 @@ class Script(scripts.Script):
 
     def run(self, p, input_text, font_size, num_layers, offset):
         text = TextGener(p, input_text, font_size, num_layers, offset)
-        image = text.create_text()
+        image = text.create_text(input_text, font_size , num_layers, offset)
         
         return Processed(p, image)
