@@ -47,10 +47,10 @@ class Script(scripts.Script):
     def title(self):
         return "Text generator"
 
-    def show(self, is_txt2img):
-        return is_txt2img
+    def show(self, is_img2img):
+        return is_img2img
 
-    def ui(self, is_txt2img):
+    def ui(self, is_img2img):
         with gr.Row():
             input_text = gr.Textbox(label="Text Input", lines=3)
             font_size = gr.Slider(label='Font Size', minimum=10, maximum=150, step=20, value=100, visible=True, interactive=True)
