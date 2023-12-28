@@ -8,19 +8,19 @@ from modules.shared import opts, state
 
 class TextGener():
     def __init__(self, input_text, font_size, num_layers, offset):
-        input_text = input_text
-        font_size = font_size
-        num_layers = num_layers
-        offset = offset
+        self.input_text = input_text
+        self.font_size = font_size
+        self.num_layers = num_layers
+        self.offset = offset
         
-    def create_text(input_text, font_size, num_layers, offset):
+    def create_text(self):
         # font = ImageFont.truetype("arialbd.ttf", font_size)
-        font = ImageFont.load_default(font_size)
+        font = ImageFont.load_default(self.font_size)
         # Create a new image with a white background
         image = Image.new("RGB", (512, 512), (255, 255, 255))
 
         # Get the size of the text and calculate its position in the center of the image
-        text_size = font.getbbox(input_text)
+        text_size = font.getbbox(self.input_text)
         text_x = (image.width - text_size[2]) / 2
         text_y = (image.height - text_size[3]) / 2
 
@@ -30,15 +30,15 @@ class TextGener():
 
         # Draw the text onto the image multiple times with a slight offset to create a shadow effect
         draw = ImageDraw.Draw(image)
-        for i in range(num_layers):
-            x = text_x + (i * offset)
-            y = text_y + (i * offset)
-            draw.text((x, y), input_text, font=font, fill=(0, 0, 0))
+        for i in range(self.num_layers):
+            x = text_x + (i * self.offset)
+            y = text_y + (i * self.offset)
+            draw.text((x, y), self.input_text, font=font, fill=(0, 0, 0))
 
         stroke_color = (0,0,0)
 
         # Draw the final text layer on top of the shadows
-        draw.text((text_x, text_y), input_text, font=font, fill=(255, 255, 255), stroke_width=1, stroke_fill=stroke_color)
+        draw.text((text_x, text_y), self.input_text, font=font, fill=(255, 255, 255), stroke_width=1, stroke_fill=stroke_color)
 
         return image
         
@@ -59,6 +59,6 @@ class Script(scripts.Script):
 
     def run(self, p, input_text, font_size, num_layers, offset):
         text = TextGener(input_text, font_size, num_layers, offset)
-        image = text.create_text(input_text, font_size, num_layers, offset)
+        image = text.create_text()
         
         return Processed(p, image)
