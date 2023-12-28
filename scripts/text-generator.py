@@ -14,8 +14,8 @@ class TextGener():
         self.offset = offset
         
     def create_text(self):
-        # font = ImageFont.truetype("arialbd.ttf", font_size)
-        font = ImageFont.load_default(self.font_size)
+        font = ImageFont.truetype("arialbd.ttf", self.font_size)
+        # font = ImageFont.load_default(self.font_size)
         # Create a new image with a white background
         image = Image.new("RGB", (512, 512), (255, 255, 255))
 
